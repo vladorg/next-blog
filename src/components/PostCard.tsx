@@ -13,14 +13,11 @@ export const PostCard: FunctionComponent<iPostCardProps> = ({
   isMyPost
 }) => {
   const {
-    _id, title, content, date, 
-    author: { 
-      name: authorName, role: authorRole, id: authorId
-    } 
+    _id, title, content, date, authorId, authorInfo
   } = post;  
 
   return (
-    <article className={`flex max-w-xl flex-col items-start justify-between border p-4 ${isMyPost ? 'border-green-600 border-4' : 'border-indigo-600'}`}>
+    <article className={`flex max-w-xl flex-col items-start justify-between border p-4 ${isMyPost ? 'border-green-600' : 'border-indigo-600'}`}>
       <div className="flex">
         <div className="flex items-center gap-x-4 text-xs">
           <time dateTime={date} className="text-gray-500">
@@ -59,15 +56,15 @@ export const PostCard: FunctionComponent<iPostCardProps> = ({
       </div>
 
       <div className="relative mt-8 flex items-center gap-x-4">
-      <Image src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="logo" width={40} height={40} className="h-10 w-10 rounded-full bg-gray-50" unoptimized />
+      <Image src={authorInfo?.photo || ''} alt="user" width={40} height={40} className="h-10 w-10 rounded-full bg-gray-50" unoptimized />
         <div className="text-sm leading-6">
           <p className="font-semibold text-gray-900">
             <a href="#">
               <span className="absolute inset-0" />
-              {authorName}
+              {authorInfo?.name || ''}
             </a>
           </p>
-          <p className="text-gray-600">{authorRole || ""}</p>
+          <p className="text-gray-600">{authorInfo?.role || ''}</p>
         </div>
       </div>
     </article>

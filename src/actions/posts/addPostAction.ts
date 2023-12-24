@@ -21,17 +21,17 @@ export const addPostAction = async (formData: FormData): Promise<iAddPostRespons
       body: JSON.stringify(Object.fromEntries(formData))
     });
 
-    const { message, id, title } = await request.json() as iAddPostResponse;
+    const { message, newPost } = await request.json() as iAddPostResponse;
 
-    if (id) {
-      console.log(`new post added: ${title}`);
+    if (newPost) {
+      console.log(`new post added: ${newPost.title}`);
       
       revalidatePath('/');
     } else {
       console.log(message);
     }
 
-    return { message, id, title }
+    return { message, newPost }
   } catch(err) {
     console.log(err);
     return { message: "Failed add post!" }

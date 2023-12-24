@@ -1,11 +1,30 @@
 import { PostList } from "../PostsList";
 import { useAuth } from "@/hooks/useAuth";
 import { getAllPostsAction } from "@/actions/posts/getAllPostsAction";
+import { getUserInfoAction } from "@/actions/user/getUserInfoAction";
+import { iPostCard } from "@/types/posts";
+import { delay } from "@/utils/delay";
 
 
 export const HomeView = async () => {
   const { posts } = await getAllPostsAction();  // TODO: create server action for this
-  const { isAuth, info } = await useAuth();   
+  const { isAuth, info } = await useAuth();  
+
+  if (posts?.length) {
+    for(let post of posts) {
+      const { authorId } = post;
+      post.authorInfo = {};
+
+      const { user } = await getUserInfoAction(authorId);    
+      
+      if (user) {
+        const { name, role, photo } = user;
+        post.authorInfo.name = name;
+        post.authorInfo.role = role;
+        post.authorInfo.photo = photo;
+      }
+    }
+  }
 
   return (
     <>
@@ -18,7 +37,9 @@ export const HomeView = async () => {
             </p>
           </div>
           <div className="mx-auto mt-10 grid grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            <PostList posts={posts} userInfo={info} />
+            {posts?.length ? (
+              <PostList posts={posts} userInfo={info} />
+            ) : 'No posts...'}            
           </div>
         </div>
       </div>

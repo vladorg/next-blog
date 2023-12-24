@@ -19,12 +19,13 @@ export const AccountView = async ({ userId }: { userId: string }) => {
     notFound();
   }   
 
-  const { name, role, login, level, _id } = user;
+  const { name, role, login, level, _id, photo } = user;
   const { posts } = await getPostsByAuthor(_id);  // TODO: create server action for this
 
   let userRows = [
     { title: "Full name", content: name, name: "name" },
     { title: "Role", content: role, name: "role" },
+    { title: "Photo", content: photo, name: "photo", type: "file" },
     { title: "Login", content: login, name: "login", readonly: true },
     { title: "Account level", content: level, name: "level", readonly: true },
     { title: "Account id", content: _id, name: "id", readonly: true },

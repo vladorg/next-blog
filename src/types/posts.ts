@@ -5,12 +5,12 @@ export interface iPostCard {
   title: string,
   content: string,
   date: string,
-  author: {
-    name: string,
-    role: string, 
-    id: string, 
-    login: string
-  },
+  authorId: string,
+  authorInfo?: {
+    name?: string,
+    role?: string,
+    photo?: string
+  }
 }
 
 export interface iPostCardProps {
@@ -51,8 +51,7 @@ export interface iGetOnePostsResponse extends iPostsApi {
 }
 
 export interface iAddPostResponse extends iPostsApi {
-  title?: string,
-  id?: string
+  newPost?: iPostCard
 }
 
 export interface iDeletePostResponse extends iPostsApi {

@@ -12,7 +12,7 @@ const RegisterView = () => {
 
   const actionHandler = async (formData: FormData) => {
     const password = formData.get('password');
-    const password_repeat = formData.get('password_repeat');
+    const password_repeat = formData.get('password_repeat');    
 
     if (password != password_repeat) {
       toast.error('Password and password repeat are not match!');
@@ -61,6 +61,20 @@ const RegisterView = () => {
                   autoComplete="off"
                   placeholder="Super_Login"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo
+              </label>
+              <div className="mt-2">
+                <input
+                  id="photo"
+                  name="photo"
+                  type="file"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>

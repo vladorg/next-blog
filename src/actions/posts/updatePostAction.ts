@@ -1,13 +1,18 @@
 'use server'; // SERVER ACTION
 
+import { useToken } from "@/hooks/useToken";
 import { iUpdatePostResponse } from "@/types/posts";
 import { revalidatePath } from "next/cache";
 
 export const updatePostAction = async (id: string, body: FormData): Promise<iUpdatePostResponse> => {
   try {
+    const token = useToken(); 
     const request = await fetch(`${process.env.API_URL}/posts/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       body: JSON.stringify(Object.fromEntries(body)),
       next: { tags: ['updatePost'] }
     });

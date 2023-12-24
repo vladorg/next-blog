@@ -8,6 +8,7 @@ export interface iEditRow {
   title: string,
   content: string | number, 
   name: string,
+  type: string,
   readonly: boolean,
   onSave: Function
 }
@@ -16,6 +17,7 @@ export interface iUserInfoRow {
   title: string,
   content: string | number,
   name: string,
+  type?: string,
   readonly?: boolean
 }
 

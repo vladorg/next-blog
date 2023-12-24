@@ -1,12 +1,15 @@
 'use server'; // SERVER ACTION
  
+import { useToken } from "@/hooks/useToken";
 import { iDeletePostResponse } from "@/types/posts";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 export const deletePostAction = async (id: string): Promise<iDeletePostResponse> => {
   try {
+    const token = useToken(); 
     const request = await fetch(`${process.env.API_URL}/posts/${id}`, {
       method: "DELETE",
+      headers: { "Authorization": `Bearer ${token}` }, // this api route required authorization token}
       next: { tags: ['postDelete'] },
     });
   

@@ -4,6 +4,7 @@ export interface iUserInfo {
   name: string,
   role: string,
   level: number,
+  photo: string
 }
 
 // USER API RESPONSES

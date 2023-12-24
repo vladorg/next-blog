@@ -16,9 +16,7 @@ export const getUserInfoAction = async (id: string): Promise<iGetUserResponse> =
     
     const { message, user } = await request.json() as iGetUserResponse; 
 
-    if (user) {
-      console.log(`user finded: ${user.login}`);
-    } else {
+    if (!user) {
       console.log(message);
     }
 

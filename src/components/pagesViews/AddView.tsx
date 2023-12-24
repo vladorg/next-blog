@@ -10,10 +10,10 @@ export const AddView = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const actionHandler = async (formData: FormData) => {
-    const { message, id, title } = await addPostAction(formData);     
+    const { message, newPost } = await addPostAction(formData);     
 
-    if (id) {
-      toast.success(`New post added: ${title}`)
+    if (newPost) {
+      toast.success(`New post added: ${newPost.title}`)
       formRef.current?.reset();
     } else {
       toast.error(message);

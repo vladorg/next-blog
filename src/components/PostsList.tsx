@@ -10,6 +10,7 @@ import { iPostCard, iPostListProps, iUpdatedFiels } from "@/types/posts"
 import { PostUpdateModal } from "./ui/modals/PostUpdateModal"
 import { revalidateTag } from "next/cache"
 
+// TODO: author info will not update when it has been change from account settings page
 
 export const PostList: FunctionComponent<iPostListProps> = ({ 
   posts, 
@@ -70,15 +71,14 @@ export const PostList: FunctionComponent<iPostListProps> = ({
       toast.error('Failed delete!');
       }
     }
-  } 
-  
+  }   
 
   // TODO: empty posts msg view
 
   return (
     <>
       {posts?.length && posts.map((post: iPostCard) => {
-        const isMyPost = userInfo?.userId == post.author.id;
+        const isMyPost = userInfo?.userId == post.authorId;
         const onUpdate = 
           isMyPost 
           ||

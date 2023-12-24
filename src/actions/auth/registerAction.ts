@@ -5,11 +5,10 @@ import { revalidateTag } from "next/cache";
 
 
 export const registerAction = async (formData: FormData): Promise<iRegisterResponse> => {   
-  try {
+  try {    
     const request = await fetch(`${process.env.API_URL}/auth/register`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: formData,
       next: { revalidate: 10, tags: ['register'] },
     });
   
