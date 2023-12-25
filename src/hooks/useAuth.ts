@@ -1,4 +1,4 @@
-import { iTokenPayload } from "@/types/general";
+import { iTokenPayload } from "@/types";
 import { cookies } from "next/headers";
 
 export interface iUseAuthResponse {

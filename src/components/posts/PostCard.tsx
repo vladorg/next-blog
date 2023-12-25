@@ -1,10 +1,16 @@
 'use client';
 
-import { iPostCardProps } from "@/types/posts";
+import { iPostCard } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FunctionComponent } from "react"
 
+interface iPostCardProps {
+  post: iPostCard,
+  onUpdate: Function | null,
+  onDelete: Function | null,
+  isMyPost?: boolean
+}
 
 export const PostCard: FunctionComponent<iPostCardProps> = ({
   post, 
@@ -56,16 +62,26 @@ export const PostCard: FunctionComponent<iPostCardProps> = ({
       </div>
 
       <div className="relative mt-8 flex items-center gap-x-4">
-      <Image src={authorInfo?.photo || ''} alt="user" width={40} height={40} className="h-10 w-10 rounded-full bg-gray-50" unoptimized />
-        <div className="text-sm leading-6">
-          <p className="font-semibold text-gray-900">
-            <a href="#">
-              <span className="absolute inset-0" />
+        {authorInfo?.photo ? (
+          <>
+            <Image src={authorInfo?.photo || ''} alt="user" width={40} height={40} className="h-10 w-10 rounded-full bg-gray-50" unoptimized />
+            <div className="text-sm leading-6">
+              <p className="font-semibold text-gray-900">
+                <a href="#">
+                  <span className="absolute inset-0" />
+                  {authorInfo?.name || ''}
+                </a>
+              </p>
+              <p className="text-gray-600">{authorInfo?.role || ''}</p>
+            </div>
+          </>
+        ) : (
+          <div className="text-sm leading-6">
+            <p className="font-semibold text-gray-900">
               {authorInfo?.name || ''}
-            </a>
-          </p>
-          <p className="text-gray-600">{authorInfo?.role || ''}</p>
-        </div>
+            </p>
+          </div>
+        )}        
       </div>
     </article>
   )

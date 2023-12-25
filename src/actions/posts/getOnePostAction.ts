@@ -1,6 +1,11 @@
 'use server';  // SERVER ACTION
 
-import { iGetOnePostsResponse } from "@/types/posts";
+import { iPostCard } from "@/types";
+
+interface iGetOnePostsResponse {
+  message: string,
+  post?: iPostCard[]
+}
 
 export const getOnePostAction = async (id: string): Promise<iGetOnePostsResponse> => {
   try {

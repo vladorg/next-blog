@@ -1,30 +1,16 @@
-import { PostList } from "../PostsList";
+import { PostList } from "../posts/PostsList";
 import { useAuth } from "@/hooks/useAuth";
 import { getAllPostsAction } from "@/actions/posts/getAllPostsAction";
-import { getUserInfoAction } from "@/actions/user/getUserInfoAction";
-import { iPostCard } from "@/types/posts";
 import { delay } from "@/utils/delay";
+import { useCardAuthorInfo } from "@/hooks/useCardAuthorInfo";
 
 
-export const HomeView = async () => {
-  const { posts } = await getAllPostsAction();  // TODO: create server action for this
+export const BlogView = async () => {
+  const { posts } = await getAllPostsAction();
   const { isAuth, info } = await useAuth();  
-
-  if (posts?.length) {
-    for(let post of posts) {
-      const { authorId } = post;
-      post.authorInfo = {};
-
-      const { user } = await getUserInfoAction(authorId);    
-      
-      if (user) {
-        const { name, role, photo } = user;
-        post.authorInfo.name = name;
-        post.authorInfo.role = role;
-        post.authorInfo.photo = photo;
-      }
-    }
-  }
+  
+  await useCardAuthorInfo(posts || []);  
+  await delay(500);
 
   return (
     <>

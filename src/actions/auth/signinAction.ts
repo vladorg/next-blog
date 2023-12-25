@@ -1,8 +1,13 @@
 'use server'; // SERVER ACTION
 
-import { iSigninResponse } from "@/types/auth";
 import { revalidateTag } from "next/cache";
 import { cookies } from 'next/headers'
+
+interface iSigninResponse {
+  message: string,
+  token?: string,
+  user?: string
+}
 
 export const signinAction = async (formData: FormData): Promise<iSigninResponse>  => {
   try {
@@ -15,7 +20,6 @@ export const signinAction = async (formData: FormData): Promise<iSigninResponse>
   
     const { message, token, user } = await request.json() as iSigninResponse;
 
-    // TODO: redirect after success auth  
     if (token) {
       console.log(`${message} ${token ? token : ''}`);
       

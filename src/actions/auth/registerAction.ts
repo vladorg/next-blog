@@ -1,8 +1,12 @@
 'use server'; // SERVER ACTION
 
-import { iRegisterResponse } from "@/types/auth";
-import { revalidateTag } from "next/cache";
+import { iUserData } from "@/types";
+import { revalidatePath, revalidateTag } from "next/cache";
 
+interface iRegisterResponse {
+  message: string,
+  newUser?: iUserData
+}
 
 export const registerAction = async (formData: FormData): Promise<iRegisterResponse> => {   
   try {    
@@ -20,6 +24,8 @@ export const registerAction = async (formData: FormData): Promise<iRegisterRespo
     } else {
       console.log(message);
     }
+
+    revalidatePath(`/members`);
   
     return { message, newUser }
   } catch(err) {

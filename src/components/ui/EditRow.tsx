@@ -2,8 +2,8 @@
 
 import { FunctionComponent, useState } from "react";
 import { PencilSquareIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
-import { iEditRow } from "@/types/general";
 import Image from "next/image";
+import { iEditRow } from "@/types";
 
 export const EditRow: FunctionComponent<iEditRow> = ({
   title, 

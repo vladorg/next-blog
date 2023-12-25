@@ -1,8 +1,13 @@
 'use server'; // SERVER ACTION
 
 import { useToken } from "@/hooks/useToken";
-import { iAddPostResponse } from "@/types/posts";
+import { iPostCard } from "@/types";
 import { revalidatePath } from "next/cache";
+
+interface iAddPostResponse {
+  message: string,
+  newPost?: iPostCard
+}
 
 export const addPostAction = async (formData: FormData): Promise<iAddPostResponse> => {
   try {

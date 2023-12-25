@@ -1,10 +1,15 @@
 'use client';
 
 import { FunctionComponent, useRef } from "react";
-import { EditRow } from "./ui/EditRow";
-import { iUserInfoList } from "@/types/general";
+import { EditRow } from "../ui/EditRow";
 import { updateUserInfoAction } from "@/actions/user/updateUserInfoAction";
 import toast from "react-hot-toast";
+import { iUserInfoRow } from "@/types";
+
+interface iUserInfoList {
+  rows: iUserInfoRow[],
+  userId: string
+}
 
 export const UserInfoList: FunctionComponent<iUserInfoList> = ({ rows, userId }) => {
   const formRef = useRef<HTMLFormElement | any>(null);

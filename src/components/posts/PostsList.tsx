@@ -6,17 +6,25 @@ import { PostCard } from "./PostCard"
 import { updatePostAction } from "@/actions/posts/updatePostAction"
 import { deletePostAction } from "@/actions/posts/deletePostAction"
 import toast from "react-hot-toast"
-import { iPostCard, iPostListProps, iUpdatedFiels } from "@/types/posts"
-import { PostUpdateModal } from "./ui/modals/PostUpdateModal"
-import { revalidateTag } from "next/cache"
+import { PostUpdateModal } from "../ui/modals/PostUpdateModal"
+import { iPostCard, iTokenPayload } from "@/types"
 
-// TODO: author info will not update when it has been change from account settings page
+interface iUpdatedFiels {
+  newTitle: string, 
+  newContent: string, 
+  currentPostId: string
+}
+
+interface iPostListProps {
+  posts?: iPostCard[], 
+  userInfo?: iTokenPayload | null
+}
 
 export const PostList: FunctionComponent<iPostListProps> = ({ 
   posts, 
   userInfo
 }) => {
-  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [modalActive, setModalActive] = useState<boolean>(false)
   const [currentId, setCurrentId] = useState<string>('')
   const [currentTitle, setCurrentTitle] = useState<string>('')
   const [currentContent, setCurrentContent] = useState<string>('')  
@@ -71,9 +79,7 @@ export const PostList: FunctionComponent<iPostListProps> = ({
       toast.error('Failed delete!');
       }
     }
-  }   
-
-  // TODO: empty posts msg view
+  }
 
   return (
     <>

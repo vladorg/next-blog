@@ -9,7 +9,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { iTokenPayload } from '@/types/general';
+import { iTokenPayload } from '@/types';
 
 export const Header = ({
   isAuth, 
@@ -22,11 +22,13 @@ export const Header = ({
   const pathname = usePathname();  
 
   const links = [
-    { title: 'Home', href: '/'},
+    { title: 'Blog', href: '/blog'},
+    { title: 'Members', href: '/members/'},
   ]
 
   const linksPrivate = [
-    { title: 'Home', href: '/'},
+    { title: 'Blog', href: '/blog'},
+    { title: 'Members', href: '/members/'},
     { title: 'Add post', href: '/add'},
   ];
   
@@ -37,7 +39,7 @@ export const Header = ({
 
         <nav className="flex items-center justify-between p-6" aria-label="Global">
           <div className="flex lg:flex-1">
-            <Link href="/" className="-m-1.5 p-1.5">
+            <Link href="/blog" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="logo" width={40} height={32} className="h-8 w-auto" unoptimized />
             </Link>

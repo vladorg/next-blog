@@ -1,8 +1,13 @@
 'use server'; // SERVER ACTION
  
 import { useToken } from "@/hooks/useToken";
-import { iDeletePostResponse } from "@/types/posts";
+import { iPostCard } from "@/types";
 import { revalidatePath, revalidateTag } from "next/cache";
+
+interface iDeletePostResponse {
+  message: string,
+  deletedPost?: iPostCard
+}
 
 export const deletePostAction = async (id: string): Promise<iDeletePostResponse> => {
   try {

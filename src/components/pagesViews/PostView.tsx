@@ -1,10 +1,11 @@
 import { getOnePostAction } from "@/actions/posts/getOnePostAction"
+import { delay } from "@/utils/delay";
 import { notFound } from "next/navigation";
 
 
 
 export const PostView = async ({ postId }: { postId: string }) => {
-  const { post } = await getOnePostAction(postId); 
+  const { post } = await getOnePostAction(postId);
 
   if (!post) {
     notFound();

@@ -4,30 +4,30 @@ import { useToken } from "@/hooks/useToken";
 import { iUserInfo } from "@/types";
 import { revalidatePath } from "next/cache";
 
-interface iUpdateUserResponse {
+interface iDeleteUserResponse {
   message: string,
-  updatedUser?: iUserInfo
+  deletedUser?: iUserInfo
 }
 
-export const updateUserInfoAction = async (id: string, body: FormData): Promise<iUpdateUserResponse> => {
-  try {    
+export const deleteUserAction = async (id: string): Promise<iDeleteUserResponse> => {
+  try {
     const token = useToken();
     const request = await fetch(`${process.env.API_URL}/users/${id}`, {
-      method: "PUT",
+      method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}` // this api route required authorization token
-      },
-      body
+      }
     });
-  
-    const { message, updatedUser } = await request.json() as iUpdateUserResponse;
 
-    revalidatePath(`/account/:id`);
+    const { message, deletedUser } = await request.json() as iDeleteUserResponse;
+
     revalidatePath(`/members`);
-    
-    return { message, updatedUser }
+
+    return { message, deletedUser }
+
   } catch(err) {
     console.log(err);
-    return { message: "Failed update user info!" }
+    return { message: "Failed delete user!" }
   }
+
 }

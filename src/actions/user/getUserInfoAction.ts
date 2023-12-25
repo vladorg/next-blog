@@ -1,7 +1,12 @@
 'use server'; // SERVER ACTION
 
 import { useToken } from "@/hooks/useToken";
-import { iGetUserResponse } from "@/types/users";
+import { iUserInfo } from "@/types";
+
+interface iGetUserResponse {
+  message: string,
+  user?: iUserInfo
+}
 
 export const getUserInfoAction = async (id: string): Promise<iGetUserResponse> => {
   const token = useToken();

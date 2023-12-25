@@ -1,5 +1,8 @@
-import { HomeView } from "@/components/pagesViews/HomeView";
+import { redirect } from "next/navigation";
 
-const HomePage = () => <HomeView />
+
+const HomePage = () => {
+  redirect('/blog');
+}
 
 export default HomePage;
