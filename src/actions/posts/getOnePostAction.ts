@@ -4,7 +4,7 @@ import { iPostCard } from "@/types";
 
 interface iGetOnePostsResponse {
   message: string,
-  post?: iPostCard[]
+  post?: iPostCard
 }
 
 export const getOnePostAction = async (id: string): Promise<iGetOnePostsResponse> => {
